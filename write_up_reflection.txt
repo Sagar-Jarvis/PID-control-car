@@ -1,0 +1,24 @@
+## Reasoning behind kp, ki, kd(manual tuning) and reflections:
+
+--> I first started with all zero. And then only set the kp to a value of 3.0. As we know if car is taking kp values control of 
+sudden corrections. The higher the values the higher is the sudden correction and at 3.0 it was just flying on first 2 secs 
+taking the car off the road. Then I started decreasing and it started moving forward properly till the bridge. The kp value I came to settle
+with initially was 0.20. Then I started playing with kd values. kd makes the car take smoother turns by avoiding sudden corrections.
+So I started with 2.0, 2.5, 5.5 and then coming down to 4.5. Once I had a good running pid I add a ki value which was first 0.001 and then
+0.0001. The first one made the second turn little harder and then the 0.0001 value made the car turn properly. Later I trimmed higher steering
+values and lower steering values by bounding them in between +1 and -1 respectively. This helped immensely in making the car drive little
+smoother at higher speeds like at 0.4 throttle.
+
+--> The model doesn't make use of speed and angle variables as it's very basic pid controller.
+
+--> This PID controller isn't perfect. It doesn't use twiddle for optimizing the kp, ki and kd values. Due to lack of time twiddle could not be
+implemented but after this submission the next work is on twiddle. There is a huge room for improvement in this model itself like adding
+another PID for speed and throttle. As the throttle is at a constand value(which I set it for 0.4 based on my pid can handle.) it is not
+ideal for speed control so a pid for speed control via throttle helps in having throttle and speed in dynamic range.
+
+--> I followed 2 basic mantras for this project and those are:
+
+	-If your car turns rapidly, increase kd.
+	=If your car does not turn fast enough then increase kp.
+
+--> There is a video recored while the PID controller runs the car in the simulator. The name of the video is PID.mp4.
